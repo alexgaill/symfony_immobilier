@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma super agence{% endblock %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1>Agence Lorem Ipsum</h1>
+    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quia possimus vero commodi id minus doloremque dolorem blanditiis, laboriosam dolor aspernatur. Omnis ipsam cumque delectus harum corrupti velit porro accusantium excepturi dolor sint, doloribus atque cupiditate sit hic rerum incidunt facere assumenda eos nemo placeat alias exercitationem! Recusandae, aspernatur, eos?</span>
+    <span>Similique voluptate magni, quod quo commodi accusamus aliquid, error culpa nisi, sequi a? Velit cumque provident quia repellat, harum saepe sint impedit soluta voluptatibus voluptate ipsum! Eum, nihil pariatur sequi corporis quos quidem sunt expedita maiores inventore, natus officia cum qui saepe, veniam enim ea porro, eius sapiente minima quo!</span>
+    <span>Sed voluptates ad quo, earum officiis distinctio, non autem dignissimos ut ea atque molestias. Officia neque nihil laboriosam asperiores accusantium cupiditate, tempore rerum, quibusdam dolorem, suscipit debitis numquam ab, recusandae dolores quas aspernatur ipsam culpa atque quod sequi optio sed! Ipsum, adipisci pariatur. Autem, beatae aut vero, commodi sed necessitatibus.</span></p>
+  </div>
+
+  <div class="container">
+    <h2>Les derniers biens</h2>
+    <div class="row flew">
+      {% for property in properties %}
+        <div class="col-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{{ path('property.show', {id: property.id, slug: property.slug})}}">{{ property.title }}</a>
+              </h5>
+              <p class="card-text"> {{property.city}} ({{property.postalCode }}) </p>
+              <div class="text-primary" style="font-weight:bold;font-size: 2rem;">{{ property.formattedPrice }} €</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
