@@ -29,7 +29,6 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->findVisibleQuery()
                     ->getQuery()
                     ->getResult();
-        ;
     }
     /**
     * @return Property[]
@@ -40,7 +39,6 @@ class PropertyRepository extends ServiceEntityRepository
                     ->setMaxResults(4)
                     ->getQuery()
                     ->getResult();
-        ;
     }
 
     private function findVisibleQuery(): QueryBuilder

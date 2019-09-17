@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use App\Entity\Property;
@@ -19,10 +20,10 @@ class PropertyController extends AbstractController
     }
     /**
      * @Route("/biens", name="property.index")
+     * @return Response
      */
-    public function index()
+    public function index() :Response
     {
-        $this->repository->findAll();
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties'
         ]);
