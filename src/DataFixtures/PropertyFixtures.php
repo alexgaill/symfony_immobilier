@@ -14,10 +14,11 @@ class PropertyFixtures extends Fixture
 
         for ($i=0; $i < 20; $i++) { 
            $property = new Property();
-           $content = '<p>' . join($faker->paragraphs(2), '</p><p>') . '</p>';
+           
 
-           $property->setTitle($faker->sentence())
-                    ->setDescription($content)
+
+           $property->setTitle(join($faker->words(3), " "))
+                    ->setDescription(join($faker->paragraphs(2), " "))
                     ->setSurface(mt_rand(10,300));
 
             $rooms;

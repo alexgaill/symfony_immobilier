@@ -41,5 +41,5 @@ security:
     encoders:
         # Symfony\Component\Security\User\User: plaintext
         App\Entity\User: 
-            algorithm: bcrypt
+            algorithm: auto
             cost: 12
