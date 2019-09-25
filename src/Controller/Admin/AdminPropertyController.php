@@ -13,6 +13,9 @@ use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use App\Form\PropertyType;
 
+/**
+ * @Route("/admin")
+ */
 class AdminPropertyController extends AbstractController{
 
     /**
@@ -27,7 +30,7 @@ class AdminPropertyController extends AbstractController{
     }
 
     /**
-     * @Route("/admin", name="admin.property.index")
+     * @Route("/", name="admin.property.index")
      * @return Response
      */
     public function index() : Response
@@ -37,9 +40,10 @@ class AdminPropertyController extends AbstractController{
     }
 
     /**
-     * @Route("/admin/create", name="admin.property.new")
+     * @Route("/create", name="admin.property.new")
      */
-    public function new(Request $request){
+    public function new(Request $request) : Response
+    {
 
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
@@ -59,7 +63,7 @@ class AdminPropertyController extends AbstractController{
     }
 
     /**
-     * @Route("/admin/{id}", name="admin.property.edit", methods="GET|POST")
+     * @Route("/{id}", name="admin.property.edit", methods="GET|POST")
      * @param Property $property
      */
     public function edit(Property $property, Request $request)
@@ -80,7 +84,7 @@ class AdminPropertyController extends AbstractController{
     }
 
     /**
-     * @Route("/admin/{id}", name="admin.property.delete", methods="DELETE")
+     * @Route("/{id}", name="admin.property.delete", methods="DELETE")
      * @param Property $property
      */
     public function delete(Property $property, Request $request)

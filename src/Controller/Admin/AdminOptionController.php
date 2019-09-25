@@ -51,16 +51,6 @@ class AdminOptionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.option.show", methods={"GET"})
-     */
-    public function show(Option $option): Response
-    {
-        return $this->render('admin/option/show.html.twig', [
-            'option' => $option
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin.option.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Option $option): Response
@@ -85,7 +75,7 @@ class AdminOptionController extends AbstractController
      */
     public function delete(Request $request, Option $option): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$option->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('admin/delete'.$option->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($option);
             $entityManager->flush();
