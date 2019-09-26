@@ -11,8 +11,11 @@ use Knp\Component\Pager\PaginatorInterface;
 
 use App\Entity\Property;
 use App\Entity\PropertySearch;
+use App\Entity\Contact;
 use App\Repository\PropertyRepository;
 use App\Form\PropertySearchType;
+use App\Form\ContactType;
+use App\Notification\ContactNotification;
 
 
 class PropertyController extends AbstractController
@@ -47,7 +50,7 @@ class PropertyController extends AbstractController
     /**
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
      */
-    public function show(Property $property, string $slug)
+    public function show(Property $property, string $slug, Request $request, ContactNotification $notification)
     {
         if ($property->getSlug() !== $slug) {
             return $this->redirectToRoute('property.show', [
@@ -55,9 +58,26 @@ class PropertyController extends AbstractController
                 'slug' => $property->getSlug()
             ], 301);
         }
+
+        $contact = new Contact();
+        $contact->setProperty($property);
+        $form = $this->createform(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $notification->notify($contact);
+            $this->addFlash('success', 'Votre email a bien été envoyé');
+
+            return $this->redirectToRoute('property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ]);
+        }
+
         return $this->render('property/show.html.twig', [
             'current_menu' => 'properties',
-            'property' => $property
+            'property' => $property,
+            'form' => $form->createView()
         ]);
     }
 }
