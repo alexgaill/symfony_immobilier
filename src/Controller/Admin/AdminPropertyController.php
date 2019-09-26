@@ -79,6 +79,7 @@ class AdminPropertyController extends AbstractController{
 
         return $this->render("admin/edit.html.twig", [
             'property' => $property,
+            'current_menu' => 'properties',
             'form' => $form->createView()
         ]);
     }
